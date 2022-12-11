@@ -1,15 +1,15 @@
 const { ethers } = require('ethers');
 const { contract_address, abi } = require('./lib/contract_constants');
-//dotenv.config();
 require('dotenv').config();
-//import dotenv from 'dotenv';
 const { getImpermanentLoss } = require('./utils/uniswapqueries');
 const cron = require('node-cron');
 const { NonfungiblePositionManager } = require('@uniswap/v3-sdk');
-// import { Pool, Position, NonfungiblePositionManager, nearestUsableTick } from '@uniswap/v3-sdk';
-// import { abi as IUniswapV3PoolABI } from '@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json';
-// import { Token } from '@uniswap/sdk-core';
 
+/**
+ *
+ * @param {*} tokenId
+ * Calls contract function to remove liquidity from the pool
+ */
 const exitLiquidity = async (tokenId) => {
 	console.log(process.env.PRIVATE_KEY);
 	const provider = new ethers.providers.JsonRpcProvider(
@@ -37,14 +37,9 @@ const exitLiquidity = async (tokenId) => {
 	console.log(receipt);
 };
 
-// exitLiquidity(7083)
-// 	.then((res) => {
-// 		console.log(res);
-// 	})
-// 	.catch((err) => {
-// 		console.log(err);
-// 	});
-
+/**
+ * This function is called every minute to check if the impermanent loss is too high
+ */
 cron.schedule('* * * * *', function () {
 	getImpermanentLoss(7083)
 		.then((impermanentLossRatio) => {
@@ -66,6 +61,14 @@ cron.schedule('* * * * *', function () {
 			console.log(err);
 		});
 });
+
+// exitLiquidity(7083)
+// 	.then((res) => {
+// 		console.log(res);
+// 	})
+// 	.catch((err) => {
+// 		console.log(err);
+// 	});
 
 // another way of removing liquidity using the sdk
 // const removeLiquidityWithSdk = async () => {

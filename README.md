@@ -15,3 +15,6 @@ Now, we can actually do this better in 3 ways.
 3. Using SDK. Now uniswap has SDKs already available where we can directly call `removeCallParameters` which we can trigger without having to actually create our own smart contracts. But, we need to keep in mind that we would still need Permit option here as well if we want to act on behalf of the owner of the pool.
 
 So, the `Permit` option plays a really important role in how we can act on behalf of the pool owner. But unfortunately not much info on how to exactly use is available in uniswap docs.
+
+
+
