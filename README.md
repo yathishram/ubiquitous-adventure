@@ -6,7 +6,7 @@ But, there is a limitation with this approach.
 1. The Uniswap contract can only allow for the owner of the Pool NFT to actually create the call to remove liquidity.
 2. This doesn't allow for smart contract to create the call. We can override this by approving the contract to hold the NFT as a owner and remove the liquidity.
 
-Now this is a hacky way to remove the liquidity. But not the preferred one. This works sometimes and doesn't due to some weird error of not getting approval of the NFT transfer from chain to chain. In terms of security, this option doesn't really work in long term as well cause the deployed contract holds the ownership of the NFT behalf of the person who created the liquidity.
+Now this is a hacky way to remove the liquidity. But not the preferred one. This works sometimes and doesn't due to some weird error of not getting approval of the NFT transfer on different chains. In terms of security, this option doesn't really work in long term as well cause the deployed contract holds the ownership of the NFT behalf of the person who created the liquidity.
 
 Now, we can actually do this better in 3 ways.
 
